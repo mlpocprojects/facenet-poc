@@ -14,11 +14,18 @@ import win32com.client as wincl
 from cv2.data import haarcascades
 import pyttsx3
 
+from time import time
+
 PADDING = 50
 ready_to_detect_identity = True
 windows10_voice_interface = wincl.Dispatch("SAPI.SpVoice")
+start = time()
 FRmodel = faceRecoModel(input_shape=(3, 96, 96))
 
+# load the liveness model
+model = load_model()
+end = time()
+print(f'Total time taken for FRmodel and livenss model:{end - start}')
 # initialisation
 engine = pyttsx3.init()
 
@@ -68,9 +75,6 @@ def isBlinking(history, maxFrames):
 # load the facnet-model weights
 FRmodel.compile(optimizer='adam', loss=triplet_loss, metrics=['accuracy'])
 load_weights_from_FaceNet(FRmodel)
-
-# load the liveness model
-model = load_model()
 
 
 def prepare_database():
@@ -304,4 +308,3 @@ def welcome_users(identities):
 if __name__ == "__main__":
     database = prepare_database()
     webcam_face_recognizer(database)
-
