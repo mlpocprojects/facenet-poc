@@ -3,8 +3,13 @@
 
 import tensorflow as tf
 
+# handle GPU memory Overloading
 gpus = tf.config.experimental.list_physical_devices('GPU')
 tf.config.experimental.set_memory_growth(gpus[0], True)
+
+# Eager Execution for loading model early
+tf.executing_eagerly()
+
 import numpy as np
 import os
 import cv2
