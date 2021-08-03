@@ -1,4 +1,5 @@
-#### THIS CODE IS FROM https://github.com/shahariarrabby/deeplearning.ai/blob/master/COURSE%204%20Convolutional%20Neural%20Networks/Week%2004/Face%20Recognition/inception_blocks_v2.py
+# ### THIS CODE IS FROM https://github.com/shahariarrabby/deeplearning.ai/blob/master/COURSE%204%20Convolutional
+# %20Neural%20Networks/Week%2004/Face%20Recognition/inception_blocks_v2.py
 
 import tensorflow as tf
 import numpy as np
@@ -9,8 +10,10 @@ from keras.layers import Conv2D, ZeroPadding2D, Activation, Input, concatenate
 from keras.models import Model
 from keras.layers.normalization import BatchNormalization
 from keras.layers.pooling import MaxPooling2D, AveragePooling2D
+from keras.utils.vis_utils import plot_model
 import fr_utils
 from keras.layers.core import Lambda, Flatten, Dense
+import pydot_ng as pydot
 
 
 def inception_block_1a(X):
@@ -286,4 +289,6 @@ def faceRecoModel(input_shape):
     # Create model instance
     model = Model(inputs=X_input, outputs=X, name='FaceRecoModel')
 
+    # Plot the model
+    # plot_model(model, show_shapes=True, show_layer_names=True)
     return model

@@ -114,7 +114,7 @@ def predict(img, model):
     np_image = transform.resize(np_image, (IMG_SIZE, IMG_SIZE, 1))
     np_image = np.expand_dims(np_image, axis=0)
     prediction = model.predict(np_image)
-    print(prediction)
+    # print(prediction)
     if prediction < 0.1:
         prediction = 'closed'
     elif prediction >= 0.9:

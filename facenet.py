@@ -29,6 +29,7 @@ print(f'Total time taken for FRmodel and livenss model:{end - start}')
 # initialisation
 engine = pyttsx3.init()
 
+
 voices = engine.getProperty('voices')  # getting details of current voice
 engine.setProperty('voice', voices[1].id)  # changing index, changes voices. 1 for female
 
@@ -220,13 +221,14 @@ def process_frame(img, frame, face_cascade, open_eyes_detector, left_eye_detecto
             y = y - 15 if y - 15 > 15 else y + 15
             cv2.putText(frame, identity, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 2)
 
-    if identities != []:
-        cv2.imwrite('example.png', img)
-
-        ready_to_detect_identity = False
-        pool = Pool(processes=1)
-        # We run this as a separate process so that the camera feedback does not freeze
-        pool.apply_async(welcome_users, [identities])
+        cv2.putText(frame, identity, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 2)
+    # if identities != []:
+    #     cv2.imwrite('example.png', img)
+    #
+    #     ready_to_detect_identity = False
+    #     pool = Pool(processes=1)
+    #     # We run this as a separate process so that the camera feedback does not freeze
+    #     pool.apply_async(welcome_users, [identities])
     return img
 
 
@@ -305,6 +307,9 @@ def welcome_users(identities):
     ready_to_detect_identity = True
 
 
-if __name__ == "__main__":
-    database = prepare_database()
-    webcam_face_recognizer(database)
+# Prepare the database
+database = prepare_database()
+
+# if __name__ == "__main__":
+#
+#     webcam_face_recognizer(database)
