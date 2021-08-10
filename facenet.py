@@ -1,7 +1,7 @@
 from keras import backend as K
 import time
 from multiprocessing.dummy import Pool
-
+import requests
 K.set_image_data_format('channels_first')
 from cv2 import cv2
 import glob
@@ -29,6 +29,8 @@ print(f'Total time taken for FRmodel and livenss model:{end - start}')
 # initialisation
 engine = pyttsx3.init()
 
+# java server urls
+java_url = 'http://43.231.127.150:7788/hello?names='
 
 voices = engine.getProperty('voices')  # getting details of current voice
 engine.setProperty('voice', voices[1].id)  # changing index, changes voices. 1 for female
@@ -222,8 +224,9 @@ def process_frame(img, frame, face_cascade, open_eyes_detector, left_eye_detecto
             cv2.putText(frame, identity, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 2)
 
         cv2.putText(frame, identity, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 2)
-    # if identities != []:
-    #     cv2.imwrite('example.png', img)
+    if identities:
+        response = requests.get(java_url + ','.join(identities))
+        print(response)
     #
     #     ready_to_detect_identity = False
     #     pool = Pool(processes=1)
