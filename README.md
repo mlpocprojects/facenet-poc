@@ -2,16 +2,33 @@
 
 This repository contains a demonstration of face recognition using the FaceNet network (https://arxiv.org/pdf/1503.03832.pdf) and a webcam. Our implementation feeds frames from the webcam to the network to determine whether or not the frame contains an individual we recognize.
 
-## How to use
+Install
+-----
 
-To install all the requirements for the project run
+## clone the repository
+    > https://github.com/mlpocprojects/facenet-poc.git
+    
+    # change the directory
+    > cd facenet-poc
 
-	pip install -r requirements.txt
+Create a virtualenv in the facenet-poc directory and activate it::
+    
+    > python -m venv venv
+    > venv\Scripts\activate.bat
+    
+Install Dependencies in Virtual Environment::
 
-In the root directory. After the modules have been installed you can run the project by using python
+	> pip install -r requirements.txt
 
-	python webstreamer.py
+RUN
+---
+
+ On Local Virtual Environment::
+
+	> python webstreamer.py
 	
+Open http://localhost:8000 in a browser.
+
 # important
 -----------
 
